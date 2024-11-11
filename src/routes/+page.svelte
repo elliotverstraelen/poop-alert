@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import type { ColumnDef } from "@tanstack/table-core";
     import DataTable from "$lib/components/ui/DataTable.svelte";
     import { Skeleton } from "$lib/components/ui/skeleton";
@@ -7,13 +8,26 @@
 
     // Define loading state for displaying skeletons (optional if you simulate delay)
     let loading = true;
+    let coins = [];
 
     // Optional delay to simulate loading state (if no actual fetch is done)
     setTimeout(() => {
         loading = false;
-    }, 1000); // 1-second delay for demonstration
+    }, 2000); // 1-second delay for demonstration
+    
 
-    console.log("Monthly Coins:", monthlyCoins);
+    // Fetch data when the component mounts
+    onMount(async () => {
+        try {
+            const response = await fetch("/api/coins");
+            const data = await response.json();
+            coins = data;
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            loading = false;
+        }
+    });
 </script>
 
 <!-- Hero Section -->
@@ -48,10 +62,7 @@
     {:else}
         <!-- DataTable Wrapper with Padding and Border Styling -->
         <div class="p-4 border rounded-md shadow-md bg-white">
-            <DataTable
-                columns={monthlyColumns}
-                data={monthlyCoins}
-            />
+            <DataTable columns={monthlyColumns} data={coins} />
         </div>
     {/if}
 </section>
