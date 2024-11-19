@@ -8,13 +8,20 @@
 <Card.Root class="mx-auto max-w-sm">
 	<Card.Header>
 		<Card.Title class="text-2xl">Login</Card.Title>
-		<Card.Description>Enter your email below to login to your account</Card.Description>
+		<Card.Description
+			>Enter your email below to login to your account</Card.Description
+		>
 	</Card.Header>
 	<Card.Content>
 		<div class="grid gap-4">
 			<div class="grid gap-2">
 				<Label for="email">Email</Label>
-				<Input id="email" type="email" placeholder="m@example.com" required />
+				<Input
+					id="email"
+					type="email"
+					placeholder="m@example.com"
+					required
+				/>
 			</div>
 			<div class="grid gap-2">
 				<div class="flex items-center">
@@ -30,7 +37,7 @@
 		</div>
 		<div class="mt-4 text-center text-sm">
 			Don't have an account?
-			<a href="##" class="underline"> Sign up </a>
+			<a href="/signup" class="underline"> Sign up </a>
 		</div>
 	</Card.Content>
 </Card.Root>
