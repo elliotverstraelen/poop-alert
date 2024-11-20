@@ -99,15 +99,6 @@
 		font-size: 1.75rem;
 		vertical-align: middle;
 	}
-	.toggle-state-btn {
-		padding: 0.5rem 1rem;
-		border: none;
-		cursor: pointer;
-		margin: 0.5rem;
-		background-color: #28a745;
-		color: white;
-		border-radius: 0.25rem;
-	}
 	.flex {
 		display: flex;
 		align-items: center;

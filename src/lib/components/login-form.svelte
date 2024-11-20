@@ -3,6 +3,33 @@
 	import * as Card from "$lib/components/ui/card/index.js";
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { Label } from "$lib/components/ui/label/index.js";
+
+	let email = "";
+	let password = "";
+	let errorMessage = "";
+
+	const handleLogin = async () => {
+		try {
+			const response = await fetch("/api/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email, password }),
+			});
+
+			const result = await response.json();
+
+			if (response.ok) {
+				errorMessage = result.message;
+			} else {
+				errorMessage =
+					result.error || "An error occurred during login.";
+			}
+		} catch (error) {
+			errorMessage = "An error occurred during login.";
+		}
+	};
 </script>
 
 <Card.Root class="mx-auto max-w-sm">
@@ -19,6 +46,7 @@
 				<Input
 					id="email"
 					type="email"
+					bind:value={email}
 					placeholder="m@example.com"
 					required
 				/>
@@ -30,9 +58,19 @@
 						Forgot your password?
 					</a>
 				</div>
-				<Input id="password" type="password" required />
+				<Input
+					id="password"
+					type="password"
+					bind:value={password}
+					required
+				/>
 			</div>
-			<Button type="submit" class="w-full">Login</Button>
+			{#if errorMessage}
+				<div class="text-red-500">{errorMessage}</div>
+			{/if}
+			<Button type="button" class="w-full" onclick={handleLogin}
+				>Login</Button
+			>
 			<Button variant="outline" class="w-full">Login with Google</Button>
 		</div>
 		<div class="mt-4 text-center text-sm">
